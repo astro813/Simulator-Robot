@@ -36,38 +36,25 @@ public:
       }
     // creat a 3D module with value 0
     
-      void  readintext()
-        {
-            ifstream ifs;
-            ifs.open("database.txt");
-            if(ifs == NULL)
-                return;
-            vector< vector<int> > vec;
-            vector<int> vec_tmp;
-            int tmp;
-            int i = 0;
-            while (ifs.good())
-            {
-                ++i;
-                ifs>>tmp;
-                vec_tmp.push_back(tmp);
-                if(i == 2)
-                {
-                    i = 0;
-                    vec.push_back(vec_tmp);
-                    vec_tmp.clear();
-                    }
-                }
-            for(int j=0; j<vec.size(); ++j)
-            {
-                
-                for(int k=0; k<vec[j].size(); ++k)
-                {
-                    cout<<vec[j][k]<<" ";
-                }
-                cout<<endl;
+            int read_in_txt()
+{
+    fstream myfile("data.txt", ios_base::in);
+    double a;
+
+    for(int i=0;i<HEIGHT;i++){
+            for(int j=0;j<WIDTH;j++){
+                for(int k=0;k<DEPTH;k++)
+        if(myfile >> a){
+            environment3D[i][j][k]=a;
             }
+
         }
+
+    }
+
+    return environment3D[1][2][2];
+}
+
     //get the data from txt file
     
     
