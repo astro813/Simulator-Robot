@@ -26,8 +26,8 @@ public:
     void ifborder()
     {
     environment land_ocean(50000,50000,10000,20000);
-    // need a method to load a grid of heights and water depth
-    //need to ba able to add robots
+     need a method to load a grid of heights and water depth
+     need to ba able to add robots
     // call land_ocean "world"
     // world.addCar(100,100);
     //world.addSubmarine(100,100); // if you add a submarine where there is nowater, problem.
