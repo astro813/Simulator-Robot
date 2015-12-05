@@ -36,7 +36,7 @@ public:
       }
     // creat a 3D module with value 0
     
-            int read_in_txt()
+            void read_in_txt()
 {
     fstream myfile("data.txt", ios_base::in);
     double a;
@@ -52,7 +52,7 @@ public:
 
     }
 
-    return environment3D[1][2][2];
+
 }
 
     //get the data from txt file
