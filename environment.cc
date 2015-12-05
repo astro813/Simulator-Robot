@@ -40,19 +40,14 @@ public:
 {
     fstream myfile("data.txt", ios_base::in);
     double a;
-
     for(int i=0;i<HEIGHT;i++){
             for(int j=0;j<WIDTH;j++){
                 for(int k=0;k<DEPTH;k++)
         if(myfile >> a){
             environment3D[i][j][k]=a;
             }
-
         }
-
     }
-
-
 }
 
     //get the data from txt file
