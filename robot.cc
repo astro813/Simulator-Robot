@@ -9,15 +9,16 @@ private:
      double x;
      double y;
      double z;
-     vector<double> realPos;
-     vector<double> believePos;
+     vector<double*> realPos;
      vector<double> realVelocity;
-     vector<double> believeVelocity;
+     vector<double> realtheta;
 protected:
     double velocity;
     double theta;
 public:
-    Robot(double x=0,double y=0,double z=0, double velocity=0, double theta=0):x(x),y(y),z(z),velocity(velocity),theta(theta){}
+    Robot(double x=0,double y=0,double z=0, double velocity=0, double theta=0):x(x),y(y),z(z),velocity(velocity),theta(theta){
+
+    }
 
     void setlocation(double x, double y, double z=0){this->x=x;this->y=y;this->z=z;}
 
@@ -45,21 +46,20 @@ public:
      this->z=input_z;
     }
 
-    void updatelocation(double v, double theta)
+    void updatetate()
     {
         this->x=this->x+ velocity*cos(theta);
         this->y=this->y+ velocity*sin(theta);
-    }
-
-      double* getlocation(){
-        double location[3] ;
+        double location[3];
         location[0]=this->x;
         location[1]=this->y;
         location[2]=this->z;
-        //cout <<*(x+1)<<"w";
-        return location;
+        realPos.push_back(location);
+        realVelocity.push_back(velocity);
+        realtheta.push_back(theta);
 
-        }
+    }
+
      friend ostream& operator <<(ostream& s, Robot c){
      return s << c.x<<" " <<c.y<< " "<< c.z<<" " <<c.velocity<<" " <<c.theta<<" " ;
      }
@@ -68,7 +68,5 @@ public:
 int main(){
 Robot car(2.0,1.0,0);
 car.setlocation(1.0,2.0,0.0);
-double *location=car.getlocation();
-cout<< "x="<<location[0]<<" "<<"y="<<location[1]<<" "<<"z="<<location[2];
 return 0;
 }

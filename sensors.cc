@@ -3,70 +3,51 @@
 using namespace std;
 #include <random>
 #include "robot.cc"
-//need head
-#if 0
-class sensor {
-private:
-     robot& r;
-public:
-     sensor(robot& r) : r(r) {}
-     
-     // r.realPos.x
-                                                    
-};
-#endif
+#include <vector>
+
 
 class sensors: public Robot{
 private:
-     int sensors_x;
-     int sensors_y;
-     int sensors_z;
-     int t;
-     int sensors_velocity;
-     int sensors_theta;
+     Robot& c;
+     vector<double*> believePos;
+     vector<double> believeVelocity;
+     vector<double> believetheta;
+     double sensors_x=0;
+     double sensors_y=0;
+     double sensors_z=0;
+     double sensors_velocity=0;
+     double sensors_theta=0;
+
 public:
-     sensors(int x=0,int y=0,int z=0,int velocity=0,int theta=0){
-     Robot(x,y,z,velocity,theta);
-     }
+     sensors(Robot& r):c(r){}
      double normaldistribution(){
      default_random_engine generator;
      normal_distribution<double> distribution(0.0,1.0);
      return distribution(generator);
      }
-     int radar(){
-     this->sensors_z= get_z()+normaldistribution();
-     }
-     int gps(){
+
+     void gps(){
      this->sensors_x= get_x()+normaldistribution();
      this->sensors_y= get_y()+normaldistribution();
-     }
-     int SONAR(){
-     this->sensors_z=get_z()+normaldistribution();
-     }
-     int compass(){
-     this->sensors_theta= this->theta+normaldistribution();
-     }
-     int accelerometer(){
-     this->sensors_velocity= this->velocity+normaldistribution();
-     }
-     int Altimeter(){
      this->sensors_z= get_z()+normaldistribution();
+     double believePosition[3];
+     believePosition[0]=this->sensors_x;
+     believePosition[1]=this->sensors_y;
+     believePosition[2]=this->sensors_z;
+     believePos.push_back(believePosition);
      }
+
+     void compass(){
+     this->sensors_theta= this->theta+normaldistribution();
+     believetheta.push_back(this->sensors_theta);
+     }
+
+     void accelerometer(){
+     this->sensors_velocity= this->velocity+normaldistribution();
+     believeVelocity.push_back(this->sensors_velocity);
+     }
+
      friend ostream& operator <<(ostream& s, sensors c){
      return s << c.get_x()<<" " <<c.get_y()<< " "<< c.get_z()<<" " <<c.velocity<<" " <<c.theta<<" " ;
      }
 };
-#if 0
-class GPS : public sensor {
-public:
-     GPS(robot& r) : sensor(r) {}
-     Vector position() const {}
-};
-
-#endif
-/*int main(){
-    sensors c(1,2,3);
-    c.radar();
-cout<< c;
-}
-*/
