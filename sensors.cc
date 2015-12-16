@@ -19,6 +19,14 @@ private:
      double sensors_theta=0;
 
 public:
+	Point3d getPosition();
+	Point3d getRADAR(Point3d otherPosition);
+	double getAltimeter();
+	double getRADARAltimerer();
+	Point3d getSONARResult(Point3d other Position);
+	double getCompass();
+	Point3d getAccelerometer();
+	double WheelRotation();
      sensors(Robot& r):c(r){}
      double normaldistribution(){
      default_random_engine generator;
