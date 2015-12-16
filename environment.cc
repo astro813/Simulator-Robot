@@ -17,6 +17,15 @@ private:
     // need a 2d or 3d grid of land, water, (and if 3d, air)
        //environment needs a list of robots...
 public:
+int[][] height;
+	Direction[][] waterMotion;
+	Direction[][] wind;
+	std::vector<Robot> robotList;
+	Robot[][] use2CheckCollision;
+	bool loadFile();
+	bool saveFile();
+	dieRoll();
+	void move();
       environment(double HEIGHT,double WIDTH,double DEPTH):HEIGHT(HEIGHT),WIDTH(WIDTH),DEPTH(DEPTH)
       {
        environment3D.resize(HEIGHT);
