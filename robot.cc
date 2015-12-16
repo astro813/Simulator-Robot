@@ -16,6 +16,15 @@ protected:
     double velocity;
     double theta;
 public:
+     
+	double theta;
+	double pitch;
+	double mass;
+	double batteryList;
+	double maxCurrAMPS;
+	double voltage;
+	double maxVelocity;
+	bool stillWorking();
     Robot(double x=0,double y=0,double z=0, double velocity=0, double theta=0):x(x),y(y),z(z),velocity(velocity),theta(theta){
 
     }
