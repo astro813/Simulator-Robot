@@ -17,16 +17,11 @@ private:
      double sensors_z=0;
      double sensors_velocity=0;
      double sensors_theta=0;
+     double velocity_error=0;
+     double theta_error=0;
+     double postion_error=0;
 
 public:
-	Point3d getPosition();
-	Point3d getRADAR(Point3d otherPosition);
-	double getAltimeter();
-	double getRADARAltimerer();
-	Point3d getSONARResult(Point3d other Position);
-	double getCompass();
-	Point3d getAccelerometer();
-	double WheelRotation();
      sensors(Robot& r):c(r){}
      double normaldistribution(){
      default_random_engine generator;
@@ -57,5 +52,22 @@ public:
 
      friend ostream& operator <<(ostream& s, sensors c){
      return s << c.get_x()<<" " <<c.get_y()<< " "<< c.get_z()<<" " <<c.velocity<<" " <<c.theta<<" " ;
+     }
+
+     double abs(double x){
+     if(x<0){
+        return -x;
+     }
+     return x;
+     }
+
+     double geterror(){
+     gps();
+     compass();
+     accelerometer();
+     velocity_error=abs(this->velocity-this->sensors_velocity)/this->velocity;
+     theta_error=abs(this->theta-this->sensors_theta)/this->theta;
+     postion_error=(abs(this->sensors_x-get_x())/get_x()+abs(this->sensors_y-get_y())/get_y()+abs(this->sensors_z-get_z())/get_z())/3;
+     return (velocity_error+theta_error+postion_error)/3;
      }
 };
